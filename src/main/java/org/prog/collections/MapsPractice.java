@@ -2,10 +2,7 @@ package org.prog.collections;
 
 import org.prog.parent.Car;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 // 1. bind one person to a single car
 // 2. bind one person to multiple cars
@@ -20,15 +17,33 @@ public class MapsPractice {
         String driver2 = "Jane";
         String driver3 = "Joe";
 
-        Map<String, List<Car>> ownedCars = new HashMap<>();
-        ownedCars.put(driver1, new ArrayList<>());
-        ownedCars.put(driver2, new ArrayList<>());
-        ownedCars.put(driver3, new ArrayList<>());
+
+
+        Map<String, HashSet<Car>>  ownedCars = new HashMap<>();
+
+
+
+        ownedCars.put(driver1, new HashSet<>());
+        ownedCars.put(driver2, new HashSet<>());
+        ownedCars.put(driver3, new HashSet<>());
 
         ownedCars.get(driver1).add(new Car("Red"));
+
         ownedCars.get(driver1).add(new Car("Blue"));
+        ownedCars.get(driver1).add(new Car("Blue"));
+        ownedCars.get(driver1).add(new Car("Blue"));
+        ownedCars.get(driver1).add(new Car("Blue"));
+        ownedCars.get(driver1).add(new Car("Blue"));
+
         ownedCars.get(driver1).add(new Car("Black"));
         ownedCars.get(driver1).add(new Car("Purple"));
+
+
+
+
+
+
+
 
         ownedCars.get(driver2).add(new Car("Blue"));
         ownedCars.get(driver2).add(new Car("Yellow"));
@@ -40,8 +55,8 @@ public class MapsPractice {
         countCarsForDriver(driver3, ownedCars);
     }
 
-    public static void countCarsForDriver(String driverName, Map<String, List<Car>> cars) {
-        List<Car> carsOfOwner = cars.get(driverName);
+    public static void countCarsForDriver(String driverName, Map<String, HashSet<Car>> cars) {
+        HashSet<Car> carsOfOwner = cars.get(driverName);
         System.out.println(driverName + " has access to " + carsOfOwner.size() + " cars");
     }
 }
