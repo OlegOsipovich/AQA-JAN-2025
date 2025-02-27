@@ -13,15 +13,26 @@ public class ApiTests {
         RequestSpecification requestSpecification = RestAssured.given();
         requestSpecification.baseUri("https://randomuser.me/");
         requestSpecification.basePath("/api");
-        requestSpecification.queryParam("inc", "gender,name,nat");
+        requestSpecification.queryParam("inc", "gender,name,nat,location");
         requestSpecification.queryParam("noinfo");
-        requestSpecification.queryParam("results", "30");
+        requestSpecification.queryParam("results", "1");
 
         Response response = requestSpecification.get();
+
+        response.prettyPrint();
 
         ResultsDto results = response.as(ResultsDto.class);
         System.out.println(results.getResults().get(0).getName().getFirst());
         System.out.println(results.getResults().get(0).getName().getLast());
+        System.out.println(results.getResults().get(0).getLocation().getCity());
+
+        if (results.getResults().get(0).getLocation().getCity() != null){
+            System.out.println("City not null");
+        } else {
+            System.out.println("City is null");
+        }
+        //System.out.println(results);
+
 //        String value = response.jsonPath().get("results[0].gender");
 //        System.out.println(value);
 //        Assert.assertEquals(value, "female");
